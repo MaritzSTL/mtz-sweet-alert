@@ -1,0 +1,71 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<script src="../sweetalert2/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="../sweetalert2/dist/sweetalert2.min.css">
+
+<dom-module id="sweet-alert">
+  <script>
+    {
+      /**
+       * `<sweet-alier>` is a Polymer wrapper for SweetAlert2
+       *
+       * @demo demo/index.html
+       */
+      class SweetAlert extends Polymer.Element {
+        static get is() {
+          return 'sweet-alert'
+        }
+
+        static get properties() {
+          return {
+            /**
+             * SweetAlert2 options: https://github.com/limonte/sweetalert2#configuration
+             */
+            options: {
+              type: Object
+            },
+
+            /**
+             * Confirm callback
+             */
+            onConfirm: {
+              type: Object,
+              value: () => {}
+            },
+
+            /**
+             * Dismiss callback
+             */
+            onDismiss: {
+              type: Object,
+              value: () => {}
+            }
+          }
+        }
+
+        ready() {
+          super.ready()
+          this.options = {}
+          Array.prototype.slice.call(this.attributes).forEach((attr) => {
+            var camelCasedName = attr.name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); })
+            if (swal.isValidParameter(camelCasedName)) {
+              this.options[camelCasedName] = attr.value
+            }
+          });
+        }
+
+        open() {
+          swal(this.options).then((result) => {
+            this.onConfirm(result)
+          }, (dismiss) => {
+            this.onDismiss(dismiss)
+          }).catch(swal.noop)
+
+          return this
+        }
+      }
+
+      customElements.define(SweetAlert.is, SweetAlert)
+    }
+  </script>
+</dom-module>

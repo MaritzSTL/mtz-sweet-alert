@@ -1,0 +1,26 @@
+{
+  "name": "sweet-alert",
+  "homepage": "https://limonte.github.io/sweetalert2/",
+  "authors": [
+    "Limon Monte <limon.monte@gmail.com> (https://limonte.github.io)"
+  ],
+  "description": "A Polymer 2 wrapper for SweetAlert2",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "sweetlaert",
+    "sweetlaert2",
+    "dialog",
+    "modal"
+  ],
+  "dependencies": {
+    "polymer": "^2.0.0",
+    "sweetalert2": "^6.0.0"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "#^2.0.0",
+    "web-component-tester": "^6.0.0",
+    "iron-component-page": "^3.0.0"
+  }
+}

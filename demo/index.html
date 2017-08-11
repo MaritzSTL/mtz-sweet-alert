@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>sweet-alert demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../sweet-alert.html">
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <demo-snippet>
+      <template>
+        <dom-bind id="ajax-call">
+          <template>
+            <sweet-alert
+              id="prompt"
+              title="Submit email to run ajax request"
+              input="email"
+              show-cancel-button="true"
+              confirm-button-text="Submit"
+              show-loader-on-confirm="true"></sweet-alert>
+            <sweet-alert id="confirm" type="success"></sweet-alert>
+            <sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></sweet-alert>
+            <button on-click="showDialog">Show the dialog</button>
+          </template>
+        </dom-bind>
+
+        <script>
+          const ajaxCallExample = document.getElementById('ajax-call')
+
+          ajaxCallExample.showDialog = () => {
+            var prompt = ajaxCallExample.$.prompt
+            var confirm = ajaxCallExample.$.confirm
+            var dismiss = ajaxCallExample.$.dismiss
+
+            prompt.options.preConfirm = (email) => {
+              return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                  if (email === 'taken@example.com') {
+                    reject('This email is already taken.')
+                  } else {
+                    resolve()
+                  }
+                }, 2000)
+              })
+            };
+
+            prompt.onConfirm = (email) => {
+              confirm.options.title = email
+              confirm.open()
+            }
+
+            prompt.onDismiss = (dismiss) => {
+              if (dismiss === 'cancel') {
+                dismiss.open()
+              }
+            }
+            prompt.open()
+          }
+        </script>
+      </template>
+    </demo-snippet>
+  </div>
+</body>
+
+</html>
