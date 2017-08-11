@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>sweet-alert demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../sweet-alert.html">
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <demo-snippet>
+      <template>
+        <dom-bind id="ajax-request">
+          <template>
+            <sweet-alert
+              id="prompt"
+              title="Submit email to run ajax request"
+              input="email"
+              show-cancel-button="true"
+              confirm-button-text="Submit"
+              show-loader-on-confirm="true"></sweet-alert>
+            <sweet-alert id="confirm" type="success"></sweet-alert>
+            <sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></sweet-alert>
+            <button on-click="showDialog">AJAX request example</button>
+          </template>
+        </dom-bind>
+
+        <script>
+          const ajaxRequestExample = document.getElementById('ajax-request')
+
+          ajaxRequestExample.showDialog = () => {
+            const prompt = ajaxRequestExample.$.prompt
+            const confirm = ajaxRequestExample.$.confirm
+            const dismiss = ajaxRequestExample.$.dismiss
+
+            prompt.options.preConfirm = (email) => {
+              return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                  if (email === 'taken@example.com') {
+                    reject('This email is already taken.')
+                  } else {
+                    resolve()
+                  }
+                }, 2000)
+              })
+            };
+
+            prompt.onConfirm = (email) => {
+              confirm.options.title = email
+              confirm.open()
+            }
+
+            prompt.onDismiss = (dismiss) => {
+              if (dismiss === 'cancel') {
+                dismiss.open()
+              }
+            }
+            prompt.open()
+          }
+        </script>
+      </template>
+    </demo-snippet>
+
+    <demo-snippet>
+      <template>
+        <dom-bind id="chaining-dialogs">
+          <template>
+            <sweet-alert id="survey"></sweet-alert>
+            <sweet-alert id="confirm" type="success" title="All done!" confirm-button-text="Lovely!"></sweet-alert>
+            <button on-click="showDialog">Chaining dialogs example</button>
+          </template>
+        </dom-bind>
+
+        <script>
+          const chainingDialogExample = document.getElementById('chaining-dialogs')
+
+          chainingDialogExample.showDialog = () => {
+            const survey = chainingDialogExample.$.survey
+            const confirm = chainingDialogExample.$.confirm
+
+            survey.swal.setDefaults({
+              input: 'text',
+              confirmButtonText: 'Next &rarr;',
+              showCancelButton: true,
+              animation: false,
+              progressSteps: ['1', '2', '3']
+            })
+
+            survey.queue([
+              {
+                title: 'Question 1',
+                text: 'Chaining swal2 modals is easy'
+              },
+              'Question 2',
+              'Question 3'
+            ])
+
+            survey.onConfirm = (result) => {
+              survey.swal.resetDefaults()
+              confirm.options.html = 'Your answers: <pre>' + JSON.stringify(result) + '</pre>'
+              confirm.open()
+            }
+
+            survey.onDismiss = (dismiss) => {
+              survey.swal.resetDefaults()
+            }
+          }
+        </script>
+      </template>
+    </demo-snippet>
+  </div>
+</body>
+
+</html>
