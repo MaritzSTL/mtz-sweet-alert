@@ -23,3 +23,17 @@
   document.querySelector('sweet-alert').open()
 </script>
 ```
+
+# Installation
+
+```bash
+bower install --save sweetalert2-polymer
+```
+
+# Usage
+
+```html
+<link rel="import" href="bower_components/sweet-alert/sweet-alert.html">
+
+<sweet-alert type="success" title="Awesome"></sweet-alert>
+```
