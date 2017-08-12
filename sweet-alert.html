@@ -7,7 +7,7 @@
   <script>
     {
       /**
-       * `<sweet-alier>` is a Polymer wrapper for SweetAlert2
+       * `<sweet-alert>` is a Polymer wrapper for SweetAlert2
        *
        * @demo demo/index.html
        */
@@ -39,21 +39,32 @@
             onDismiss: {
               type: Object,
               value: () => {}
-            }
+            },
+
+            /**
+             * The `swal` object, use it for access to methods like `cliclConfirm()`
+             */
+            swal: {
+              type: Object
+            },
           }
         }
 
         ready() {
           super.ready()
+          this.swal = swal
           this.options = {}
           Array.prototype.slice.call(this.attributes).forEach((attr) => {
-            var camelCasedName = attr.name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); })
+            var camelCasedName = attr.name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase() })
             if (swal.isValidParameter(camelCasedName)) {
               this.options[camelCasedName] = attr.value
             }
           });
         }
 
+        /**
+         * Open the modal.
+         */
         open() {
           swal(this.options).then((result) => {
             this.onConfirm(result)
