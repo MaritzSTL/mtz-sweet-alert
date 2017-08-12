@@ -71,8 +71,18 @@
           }, (dismiss) => {
             this.onDismiss(dismiss)
           }).catch(swal.noop)
+        }
 
-          return this
+        /**
+         * Open modals in sequence.
+         * @param {*[]} steps
+         */
+        queue(steps) {
+          swal.queue(steps).then((result) => {
+            this.onConfirm(result)
+          }, (dismiss) => {
+            this.onDismiss(dismiss)
+          }).catch(swal.noop)
         }
       }
 

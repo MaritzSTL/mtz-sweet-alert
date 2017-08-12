@@ -18,7 +18,7 @@
   <div class="vertical-section-container centered">
     <demo-snippet>
       <template>
-        <dom-bind id="ajax-call">
+        <dom-bind id="ajax-request">
           <template>
             <sweet-alert
               id="prompt"
@@ -29,17 +29,17 @@
               show-loader-on-confirm="true"></sweet-alert>
             <sweet-alert id="confirm" type="success"></sweet-alert>
             <sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></sweet-alert>
-            <button on-click="showDialog">Show the dialog</button>
+            <button on-click="showDialog">AJAX request example</button>
           </template>
         </dom-bind>
 
         <script>
-          const ajaxCallExample = document.getElementById('ajax-call')
+          const ajaxRequestExample = document.getElementById('ajax-request')
 
-          ajaxCallExample.showDialog = () => {
-            var prompt = ajaxCallExample.$.prompt
-            var confirm = ajaxCallExample.$.confirm
-            var dismiss = ajaxCallExample.$.dismiss
+          ajaxRequestExample.showDialog = () => {
+            const prompt = ajaxRequestExample.$.prompt
+            const confirm = ajaxRequestExample.$.confirm
+            const dismiss = ajaxRequestExample.$.dismiss
 
             prompt.options.preConfirm = (email) => {
               return new Promise(function (resolve, reject) {
@@ -64,6 +64,54 @@
               }
             }
             prompt.open()
+          }
+        </script>
+      </template>
+    </demo-snippet>
+
+    <demo-snippet>
+      <template>
+        <dom-bind id="chaining-dialogs">
+          <template>
+            <sweet-alert id="survey"></sweet-alert>
+            <sweet-alert id="confirm" type="success" title="All done!" confirm-button-text="Lovely!"></sweet-alert>
+            <button on-click="showDialog">Chaining dialogs example</button>
+          </template>
+        </dom-bind>
+
+        <script>
+          const chainingDialogExample = document.getElementById('chaining-dialogs')
+
+          chainingDialogExample.showDialog = () => {
+            const survey = chainingDialogExample.$.survey
+            const confirm = chainingDialogExample.$.confirm
+
+            survey.swal.setDefaults({
+              input: 'text',
+              confirmButtonText: 'Next &rarr;',
+              showCancelButton: true,
+              animation: false,
+              progressSteps: ['1', '2', '3']
+            })
+
+            survey.queue([
+              {
+                title: 'Question 1',
+                text: 'Chaining swal2 modals is easy'
+              },
+              'Question 2',
+              'Question 3'
+            ])
+
+            survey.onConfirm = (result) => {
+              survey.swal.resetDefaults()
+              confirm.options.html = 'Your answers: <pre>' + JSON.stringify(result) + '</pre>'
+              confirm.open()
+            }
+
+            survey.onDismiss = (dismiss) => {
+              survey.swal.resetDefaults()
+            }
           }
         </script>
       </template>
