@@ -1,6 +1,6 @@
 {
   "name": "sweetalert2-polymer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "limonte/sweetalert2-polymer",
   "homepage": "https://github.com/limonte/sweetalert2-polymer",
   "description": "A Polymer wrapper for SweetAlert2",
