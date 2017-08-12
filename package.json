@@ -17,6 +17,10 @@
     "@polymer/polymer": "^2.0.0",
     "sweetalert2": "^6.0.0"
   },
+  "devDependencies": {
+    "polymer-cli": "^1.0.0",
+    "yargs": "latest"
+  },
   "bugs": "https://github.com/limonte/sweetalert2-polymer/issues",
   "license": "MIT"
 }
