@@ -10,11 +10,7 @@ install:
   - npm install
   - bower install
 
-before_script:
+script:
   - polymer lint --rules polymer-2 --input *.html
   - xvfb-run -s '-screen 0 1024x768x24' polymer test
 
-script:
-  - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
-      xvfb-run -s '-screen 0 1024x768x24' polymer test --env saucelabs;
-    fi
