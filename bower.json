@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "polymer": "^2.0.0",
-    "sweetalert2": "^6.0.0"
+    "sweetalert2": "^7.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "#^2.0.0",

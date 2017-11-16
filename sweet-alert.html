@@ -66,10 +66,12 @@
          */
         open() {
           swal(this.options).then((result) => {
-            this.onConfirm(result)
-          }, (dismiss) => {
-            this.onDismiss(dismiss)
-          }).catch(swal.noop)
+            if (result.value) {
+              this.onConfirm(result.value)
+            } else {
+              this.onDismiss(result.dismiss)
+            }
+          })
         }
 
         /**
@@ -78,10 +80,12 @@
          */
         queue(steps) {
           swal.queue(steps).then((result) => {
-            this.onConfirm(result)
-          }, (dismiss) => {
-            this.onDismiss(dismiss)
-          }).catch(swal.noop)
+            if (result.value) {
+              this.onConfirm(result.value)
+            } else {
+              this.onDismiss(result.dismiss)
+            }
+          })
         }
       }
 
