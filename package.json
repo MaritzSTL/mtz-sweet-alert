@@ -1,8 +1,8 @@
 {
   "name": "sweetalert2-polymer",
-  "version": "1.0.0",
-  "repository": "limonte/sweetalert2-polymer",
-  "homepage": "https://github.com/limonte/sweetalert2-polymer",
+  "version": "1.0.1",
+  "repository": "sweetalert2/sweetalert2-polymer",
+  "homepage": "https://github.com/sweetalert2/sweetalert2-polymer",
   "description": "A Polymer wrapper for SweetAlert2",
   "main": "sweet-alert.html",
   "author": "Limon Monte <limon.monte@gmail.com> (https://limonte.github.io)",
@@ -15,11 +15,11 @@
   ],
   "dependencies": {
     "@polymer/polymer": "^2.0.0",
-    "sweetalert2": "^6.0.0"
+    "sweetalert2": "^7.0.0"
   },
   "devDependencies": {
     "polymer-cli": "^1.0.0"
   },
-  "bugs": "https://github.com/limonte/sweetalert2-polymer/issues",
+  "bugs": "https://github.com/sweetalert2/sweetalert2-polymer/issues",
   "license": "MIT"
 }
