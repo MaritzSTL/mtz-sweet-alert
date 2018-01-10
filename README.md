@@ -1,10 +1,9 @@
-# `<sweet-alert>` - a Polymer wrapper for [SweetAlert2](https://github.com/sweetalert2/sweetalert2)
+# `<sweet-alert>` - a Polymer 2 wrapper for [SweetAlert2](https://github.com/sweetalert2/sweetalert2)
 
 [![Build Status](https://travis-ci.org/sweetalert2/sweetalert2-polymer.svg?branch=master)](https://travis-ci.org/sweetalert2/sweetalert2-polymer)
 ![Bower version](https://badge.fury.io/bo/sweetalert2-polymer.svg)
 [![npm version](https://badge.fury.io/js/sweetalert2-polymer.svg)](https://www.npmjs.com/package/sweetalert2-polymer)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/sweetalert2/sweetalert2-polymer)
-![Polymer 2 only](https://img.shields.io/badge/Polymer%202-only-blue.svg)
 
 [Live demo ↗](https://sweetalert2.github.io/sweetalert2-polymer/components/sweet-alert/#/elements/sweet-alert/demos/demo/index.html)
 
