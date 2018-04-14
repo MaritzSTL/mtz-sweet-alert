@@ -68,26 +68,45 @@ An element to display alerts.
        * Open the modal.
        */
       open() {
-        this.swal(this.options).then((result) => {
-          if (result.value) {
-            this.onConfirm(result.value);
-          } else {
-            this.onDismiss(result.dismiss);
-          }
-        });
+        this.swal(this.options).then((result) => this.__openDialog(result));
       },
+
       /**
        * Open modals in sequence.
        * @param {*[]} steps
        */
       queue(steps) {
-        this.swal.queue(steps).then((result) => {
-          if (result.value) {
+        this.swal.queue(steps).then((result) => this.__openDialog(result));
+      },
+
+      /**
+       * open confirm/dismiss dialog and trigger callback method
+       * @private
+       * @param {Object} result
+       */
+      __openDialog(result) {
+        const type = result.value ? 'onConfirm' : 'onDismiss';
+        this.__callBackMethod(type, result);
+      },
+
+      /**
+       * callback method for confirm/dismiss dialogs
+       * @private
+       * @param {String} type
+       * @param {Object} result
+       */
+      __callBackMethod(type, result) {
+        if (typeof this[type] !== 'function') return;
+        switch (type) {
+          case 'onConfirm':
             this.onConfirm(result.value);
-          } else {
+            break;
+          case 'onDismiss':
             this.onDismiss(result.dismiss);
-          }
-        });
+            break;
+          default:
+            break;
+        }
       }
 
     });
