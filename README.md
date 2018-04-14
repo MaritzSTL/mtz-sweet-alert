@@ -1,21 +1,32 @@
-# \<mtz-sweet-alert\>
+# `<mtz-sweet-alert>` - a Polymer 1.x wrapper for [SweetAlert2](https://github.com/sweetalert2/sweetalert2)
 
-An element to display alerts.
-
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
+<!--
 ```
-$ polymer serve
+<custom-element-demo height="450">
+  <template>
+    <link rel="import" href="sweet-alert.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<sweet-alert title="Oops..." text="Something went wrong!" type="error"></sweet-alert>
+
+<script>
+  document.querySelector('sweet-alert').open()
+</script>
 ```
 
-## Running Tests
+# Installation
 
-```
-$ polymer test
+```bash
+bower install --save MaritzSTL/mtz-sweet-alert
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+# Usage
+
+```html
+<link rel="import" href="bower_components/mtz-sweet-alert/mtz-sweet-alert.html">
+
+<sweet-alert type="success" title="Awesome"></sweet-alert>
