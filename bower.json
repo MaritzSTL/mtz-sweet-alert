@@ -3,7 +3,8 @@
   "description": "An element to display alerts.",
   "main": "mtz-sweet-alert.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "sweetalert2": "sweetalert2/sweetalert2#^7.18.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
