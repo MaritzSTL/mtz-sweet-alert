@@ -1,6 +1,19 @@
 {
   "name": "mtz-sweet-alert",
-  "description": "An element to display alerts.",
+  "homepage": "https://sweetalert2.github.io/",
+  "authors": [
+    "Limon Monte <limon.monte@gmail.com> (https://limonte.github.io)"
+  ],
+  "description": "A polymer 1.x element wrapper for sweetalert2 library.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "sweetlaert",
+    "sweetlaert2",
+    "dialog",
+    "modal"
+  ],
   "main": "mtz-sweet-alert.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
