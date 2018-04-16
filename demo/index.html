@@ -53,8 +53,8 @@
               confirm.options.title = email;
               confirm.open();
             };
-            prompt.onDismiss = function(dismiss) {
-              if (dismiss === 'cancel') {
+            prompt.onDismiss = function(reason) {
+              if (reason === 'cancel') {
                 dismiss.open();
               }
             };
