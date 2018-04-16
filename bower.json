@@ -1,10 +1,10 @@
 {
-  "name": "sweet-alert",
+  "name": "mtz-sweet-alert",
   "homepage": "https://sweetalert2.github.io/",
   "authors": [
     "Limon Monte <limon.monte@gmail.com> (https://limonte.github.io)"
   ],
-  "description": "A Polymer 2 wrapper for SweetAlert2",
+  "description": "A polymer 1.x element wrapper for sweetalert2 library.",
   "keywords": [
     "web-component",
     "web-components",
@@ -14,13 +14,15 @@
     "dialog",
     "modal"
   ],
+  "main": "mtz-sweet-alert.html",
   "dependencies": {
-    "polymer": "^2.0.0",
-    "sweetalert2": "^7.0.0"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "sweetalert2": "sweetalert2/sweetalert2#^7.18.0"
   },
   "devDependencies": {
-    "iron-demo-helpers": "#^2.0.0",
-    "web-component-tester": "^6.0.0",
-    "iron-component-page": "^3.0.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   }
 }

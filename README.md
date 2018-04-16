@@ -1,11 +1,4 @@
-# `<sweet-alert>` - a Polymer 2 wrapper for [SweetAlert2](https://github.com/sweetalert2/sweetalert2)
-
-[![Build Status](https://travis-ci.org/sweetalert2/sweetalert2-polymer.svg?branch=master)](https://travis-ci.org/sweetalert2/sweetalert2-polymer)
-![Bower version](https://badge.fury.io/bo/sweetalert2-polymer.svg)
-[![npm version](https://badge.fury.io/js/sweetalert2-polymer.svg)](https://www.npmjs.com/package/sweetalert2-polymer)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/sweetalert2/sweetalert2-polymer)
-
-[Live demo ↗](https://sweetalert2.github.io/sweetalert2-polymer/components/sweet-alert/#/elements/sweet-alert/demos/demo/index.html)
+# `<mtz-sweet-alert>` - a Polymer 1.x wrapper for [SweetAlert2](https://github.com/sweetalert2/sweetalert2)
 
 <!--
 ```
@@ -28,13 +21,12 @@
 # Installation
 
 ```bash
-bower install --save sweetalert2-polymer
+bower install --save MaritzSTL/mtz-sweet-alert
 ```
 
 # Usage
 
 ```html
-<link rel="import" href="bower_components/sweet-alert/sweet-alert.html">
+<link rel="import" href="bower_components/mtz-sweet-alert/mtz-sweet-alert.html">
 
 <sweet-alert type="success" title="Awesome"></sweet-alert>
-```

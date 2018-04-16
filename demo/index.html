@@ -1,99 +1,89 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>mtz-sweet-alert demo</title>
 
-  <title>sweet-alert demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../mtz-sweet-alert.html">
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../sweet-alert.html">
-</head>
-
-<body>
-  <div class="vertical-section-container centered">
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
     <demo-snippet>
       <template>
-        <dom-bind id="ajax-request">
-          <template>
-            <sweet-alert
-              id="prompt"
-              title="Submit email to run ajax request"
-              input="email"
-              show-cancel-button="true"
-              confirm-button-text="Submit"
-              show-loader-on-confirm="true"></sweet-alert>
-            <sweet-alert id="confirm" type="success"></sweet-alert>
-            <sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></sweet-alert>
-            <button on-click="showDialog">AJAX request example</button>
-          </template>
-        </dom-bind>
+        <template is="dom-bind" id="ajax-request">
+          <mtz-sweet-alert
+            id="prompt"
+            title="Submit email to run ajax request"
+            input="email"
+            show-cancel-button="true"
+            confirm-button-text="Submit"
+            show-loader-on-confirm="true">
+          </mtz-sweet-alert>
+          <mtz-sweet-alert id="confirm" type="success"></mtz-sweet-alert>
+          <mtz-sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></mtz-sweet-alert>
+          <button on-click="showDialog">AJAX request example</button>
+        </template>
 
         <script>
-          const ajaxRequestExample = document.getElementById('ajax-request')
-
+          const ajaxRequestExample = document.getElementById('ajax-request');
           ajaxRequestExample.showDialog = () => {
-            const prompt = ajaxRequestExample.$.prompt
-            const confirm = ajaxRequestExample.$.confirm
-            const dismiss = ajaxRequestExample.$.dismiss
-
+            const prompt = ajaxRequestExample.$.prompt;
+            const confirm = ajaxRequestExample.$.confirm;
             prompt.options.preConfirm = (email) => {
-              return new Promise(function (resolve, reject) {
-                setTimeout(function() {
+              return new Promise((resolve, reject) => {
+                setTimeout(() => {
                   if (email === 'taken@example.com') {
-                    reject('This email is already taken.')
+                    reject('This email is already taken.');
                   } else {
-                    resolve()
+                    resolve();
                   }
-                }, 2000)
-              })
+                }, 2000);
+              });
             };
-
-            prompt.onConfirm = (email) => {
-              confirm.options.title = email
-              confirm.open()
-            }
-
-            prompt.onDismiss = (dismiss) => {
-              if (dismiss === 'cancel') {
-                dismiss.open()
+            prompt.onConfirm = function(email) {
+              confirm.options.title = email;
+              confirm.open();
+            };
+            prompt.onDismiss = function(reason) {
+              if (reason === 'cancel') {
+                dismiss.open();
               }
-            }
-            prompt.open()
-          }
+            };
+            prompt.open();
+          };
         </script>
       </template>
     </demo-snippet>
 
     <demo-snippet>
       <template>
-        <dom-bind id="chaining-dialogs">
-          <template>
-            <sweet-alert id="survey"></sweet-alert>
-            <sweet-alert id="confirm" type="success" title="All done!" confirm-button-text="Lovely!"></sweet-alert>
-            <button on-click="showDialog">Chaining dialogs example</button>
-          </template>
-        </dom-bind>
+        <template is="dom-bind" id="chaining-dialogs">
+          <mtz-sweet-alert id="survey"></mtz-sweet-alert>
+          <mtz-sweet-alert id="confirm" type="success" title="All done!" confirm-button-text="Lovely!"></mtz-sweet-alert>
+          <button on-click="showDialog">Chaining dialogs example</button>
+        </template>
 
         <script>
-          const chainingDialogExample = document.getElementById('chaining-dialogs')
-
+          const chainingDialogExample = document.getElementById('chaining-dialogs');
           chainingDialogExample.showDialog = () => {
-            const survey = chainingDialogExample.$.survey
-            const confirm = chainingDialogExample.$.confirm
-
+            const survey = chainingDialogExample.$.survey;
+            const confirm = chainingDialogExample.$.confirm;
             survey.swal.setDefaults({
               input: 'text',
               confirmButtonText: 'Next &rarr;',
               showCancelButton: true,
               animation: false,
               progressSteps: ['1', '2', '3']
-            })
-
+            });
             survey.queue([
               {
                 title: 'Question 1',
@@ -101,22 +91,19 @@
               },
               'Question 2',
               'Question 3'
-            ])
-
-            survey.onConfirm = (result) => {
-              survey.swal.resetDefaults()
-              confirm.options.html = 'Your answers: <pre>' + JSON.stringify(result) + '</pre>'
-              confirm.open()
-            }
-
-            survey.onDismiss = (dismiss) => {
-              survey.swal.resetDefaults()
-            }
-          }
+            ]);
+            survey.onConfirm = function(result) {
+              survey.swal.resetDefaults();
+              confirm.options.html = 'Your answers: <pre>' + JSON.stringify(result) + '</pre>';
+              confirm.open();
+            };
+            survey.onDismiss = function() {
+              survey.swal.resetDefaults();
+            };
+          };
         </script>
       </template>
     </demo-snippet>
   </div>
-</body>
-
+  </body>
 </html>

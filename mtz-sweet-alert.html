@@ -1,0 +1,114 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="sweet-alert-import.html">
+
+<!--
+`mtz-sweet-alert`
+An element to display alerts.
+
+@demo demo/index.html
+-->
+
+<dom-module id="mtz-sweet-alert">
+  <script>
+    Polymer({
+
+      /* global swal */
+
+      is: 'mtz-sweet-alert',
+
+      properties: {
+        /**
+         * SweetAlert2 options: https://github.com/sweetalert2/sweetalert2#configuration
+         */
+        options: {
+          type: Object,
+          value() {
+            return {};
+          }
+        },
+        /**
+         * Confirm callback
+         */
+        onConfirm: {
+          type: Object,
+          value() {
+            return {};
+          }
+        },
+        /**
+         * Dismiss callback
+         */
+        onDismiss: {
+          type: Object,
+          value() {
+            return {};
+          }
+        },
+        /**
+         * The `swal` object, use it for access to methods like `cliclConfirm()`
+         */
+        swal: {
+          type: Object,
+          value() {
+            return swal;
+          }
+        }
+      },
+
+      attached() {
+        Array.prototype.slice.call(this.attributes).forEach((attr) => {
+          const camelCasedName = attr.name.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+          if (this.swal.isValidParameter(camelCasedName)) {
+            this.options[camelCasedName] = attr.value;
+          }
+        });
+      },
+
+      /**
+       * Open the modal.
+       */
+      open() {
+        this.swal(this.options).then((result) => this.__openDialog(result));
+      },
+
+      /**
+       * Open modals in sequence.
+       * @param {*[]} steps
+       */
+      queue(steps) {
+        this.swal.queue(steps).then((result) => this.__openDialog(result));
+      },
+
+      /**
+       * open confirm/dismiss dialog and trigger callback method
+       * @private
+       * @param {Object} result
+       */
+      __openDialog(result) {
+        const type = result.value ? 'onConfirm' : 'onDismiss';
+        this.__callBackMethod(type, result);
+      },
+
+      /**
+       * callback method for confirm/dismiss dialogs
+       * @private
+       * @param {String} type
+       * @param {Object} result
+       */
+      __callBackMethod(type, result) {
+        if (typeof this[type] !== 'function') return;
+        switch (type) {
+          case 'onConfirm':
+            this.onConfirm(result.value);
+            break;
+          case 'onDismiss':
+            this.onDismiss(result.dismiss);
+            break;
+          default:
+            break;
+        }
+      }
+
+    });
+  </script>
+</dom-module>
