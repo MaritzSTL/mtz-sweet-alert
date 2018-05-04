@@ -14,7 +14,7 @@
 <sweet-alert title="Oops..." text="Something went wrong!" type="error"></sweet-alert>
 
 <script>
-  document.querySelector('sweet-alert').open()
+  document.querySelector('mtz-sweet-alert').open()
 </script>
 ```
 
