@@ -19,19 +19,21 @@
     <div class="vertical-section-container centered">
     <demo-snippet>
       <template>
-        <template is="dom-bind" id="ajax-request">
-          <mtz-sweet-alert
-            id="prompt"
-            title="Submit email to run ajax request"
-            input="email"
-            show-cancel-button="true"
-            confirm-button-text="Submit"
-            show-loader-on-confirm="true">
-          </mtz-sweet-alert>
-          <mtz-sweet-alert id="confirm" type="success"></mtz-sweet-alert>
-          <mtz-sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></mtz-sweet-alert>
-          <button on-click="showDialog">AJAX request example</button>
-        </template>
+        <dom-bind id="ajax-request">
+          <template>
+            <mtz-sweet-alert
+              id="prompt"
+              title="Submit email to run ajax request"
+              input="email"
+              show-cancel-button="true"
+              confirm-button-text="Submit"
+              show-loader-on-confirm="true">
+            </mtz-sweet-alert>
+            <mtz-sweet-alert id="confirm" type="success"></mtz-sweet-alert>
+            <mtz-sweet-alert id="dismiss" title="You clicked the 'Cancel' button" type="error"></mtz-sweet-alert>
+            <button on-click="showDialog">AJAX request example</button>
+          </template>
+        </dom-bind>
 
         <script>
           const ajaxRequestExample = document.getElementById('ajax-request');
@@ -49,11 +51,11 @@
                 }, 2000);
               });
             };
-            prompt.onConfirm = function(email) {
+            prompt.onConfirm = (email) => {
               confirm.options.title = email;
               confirm.open();
             };
-            prompt.onDismiss = function(reason) {
+            prompt.onDismiss = (reason) => {
               if (reason === 'cancel') {
                 dismiss.open();
               }
@@ -66,11 +68,13 @@
 
     <demo-snippet>
       <template>
-        <template is="dom-bind" id="chaining-dialogs">
-          <mtz-sweet-alert id="survey"></mtz-sweet-alert>
-          <mtz-sweet-alert id="confirm" type="success" title="All done!" confirm-button-text="Lovely!"></mtz-sweet-alert>
-          <button on-click="showDialog">Chaining dialogs example</button>
-        </template>
+        <dom-bind id="chaining-dialogs">
+          <template>
+            <mtz-sweet-alert id="survey"></mtz-sweet-alert>
+            <mtz-sweet-alert id="confirm" type="success" title="All done!" confirm-button-text="Lovely!"></mtz-sweet-alert>
+            <button on-click="showDialog">Chaining dialogs example</button>
+          </template>
+        </dom-bind>
 
         <script>
           const chainingDialogExample = document.getElementById('chaining-dialogs');
@@ -92,12 +96,12 @@
               'Question 2',
               'Question 3'
             ]);
-            survey.onConfirm = function(result) {
+            survey.onConfirm = (result) => {
               survey.swal.resetDefaults();
               confirm.options.html = 'Your answers: <pre>' + JSON.stringify(result) + '</pre>';
               confirm.open();
             };
-            survey.onDismiss = function() {
+            survey.onDismiss = () => {
               survey.swal.resetDefaults();
             };
           };

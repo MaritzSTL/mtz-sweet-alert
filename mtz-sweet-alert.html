@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="sweet-alert-import.html">
 
 <!--
@@ -10,66 +10,69 @@ An element to display alerts.
 
 <dom-module id="mtz-sweet-alert">
   <script>
-    Polymer({
-
+    class MtzSweetAlert extends Polymer.Element {
       /* global swal */
+      static get is() {
+        return 'mtz-sweet-alert';
+      }
 
-      is: 'mtz-sweet-alert',
+      static get properties() {
+        return {
+          /**
+           * SweetAlert2 options: https://github.com/sweetalert2/sweetalert2#configuration
+           */
+          options: {
+            type: Object,
+            value() {
+              return {};
+            }
+          },
+          /**
+           * Confirm callback
+           */
+          onConfirm: {
+            type: Object,
+            value() {
+              return {};
+            }
+          },
+          /**
+           * Dismiss callback
+           */
+          onDismiss: {
+            type: Object,
+            value() {
+              return {};
+            }
+          },
+          /**
+           * The `swal` object, use it for access to methods like `cliclConfirm()`
+           */
+          swal: {
+            type: Object,
+            value() {
+              return swal;
+            }
+          }
+        };
+      }
 
-      properties: {
-        /**
-         * SweetAlert2 options: https://github.com/sweetalert2/sweetalert2#configuration
-         */
-        options: {
-          type: Object,
-          value() {
-            return {};
-          }
-        },
-        /**
-         * Confirm callback
-         */
-        onConfirm: {
-          type: Object,
-          value() {
-            return {};
-          }
-        },
-        /**
-         * Dismiss callback
-         */
-        onDismiss: {
-          type: Object,
-          value() {
-            return {};
-          }
-        },
-        /**
-         * The `swal` object, use it for access to methods like `cliclConfirm()`
-         */
-        swal: {
-          type: Object,
-          value() {
-            return swal;
-          }
-        }
-      },
-
-      attached() {
+      ready() {
+        super.ready();
         Array.prototype.slice.call(this.attributes).forEach((attr) => {
           const camelCasedName = attr.name.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
           if (this.swal.isValidParameter(camelCasedName)) {
             this.options[camelCasedName] = attr.value;
           }
         });
-      },
+      }
 
       /**
        * Open the modal.
        */
       open() {
         this.swal(this.options).then((result) => this.__openDialog(result));
-      },
+      }
 
       /**
        * Open modals in sequence.
@@ -77,7 +80,7 @@ An element to display alerts.
        */
       queue(steps) {
         this.swal.queue(steps).then((result) => this.__openDialog(result));
-      },
+      }
 
       /**
        * open confirm/dismiss dialog and trigger callback method
@@ -87,7 +90,7 @@ An element to display alerts.
       __openDialog(result) {
         const type = result.value ? 'onConfirm' : 'onDismiss';
         this.__callBackMethod(type, result);
-      },
+      }
 
       /**
        * callback method for confirm/dismiss dialogs
@@ -108,7 +111,7 @@ An element to display alerts.
             break;
         }
       }
-
-    });
+    }
+    window.customElements.define(MtzSweetAlert.is, MtzSweetAlert);
   </script>
 </dom-module>
